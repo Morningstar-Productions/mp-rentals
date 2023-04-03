@@ -8,25 +8,23 @@ CreateThread(function()
 	SetEntityInvincible(Land, true)
 	SetBlockingOfNonTemporaryEvents(Land, true)
 
-    exports['qb-target']:AddTargetEntity(Land, {
-        options = {
-            {
-                type = "client",
-                event = "qb-rental:client:LicenseCheck",
-                icon = "fas fa-car",
-                label = "Rent Vehicle",
-                LicenseType = "driver",
-                MenuType = "vehicle",
-            },
-            {
-                type = "client",
-                event = "qb-rental:client:return",
-                icon = "fas fa-circle",
-                label = 'Return Vehicle'
-            }
+    local options = {
+        {
+            event = "qb-rental:client:LicenseCheck",
+            icon = "fas fa-car",
+            label = "Rent Vehicle",
+            LicenseType = "driver",
+            MenuType = "vehicle",
+            distance = 2.5,
         },
-        distance = 2.5,
-    })
+        {
+            event = "qb-rental:client:return",
+            icon = "fas fa-circle",
+            label = 'Return Vehicle',
+            distance = 2.5,
+        }
+    }
+    exports.ox_target:addLocalEntity(Land, options)
 end)
 
 CreateThread(function()
@@ -37,25 +35,25 @@ CreateThread(function()
 	SetEntityInvincible(Air, true)
 	SetBlockingOfNonTemporaryEvents(Air, true)
 
-    exports['qb-target']:AddTargetEntity(Air, {
-            options = {
-                {
-                    type = "client",
-                    event = "qb-rental:client:LicenseCheck",
-                    icon = "fas fa-car",
-                    label = "Rent Vehicle",
-                    LicenseType = "pilot",
-                    MenuType = "aircraft",
-                },
-                {
-                    type = "client",
-                    event = "qb-rental:client:return",
-                    icon = "fas fa-circle",
-                    label = 'Return Vehicle'
-                }
-            },
-        distance = 2.5,
-    })
+    local options = {
+        {
+            type = "client",
+            event = "qb-rental:client:LicenseCheck",
+            icon = "fas fa-car",
+            label = "Rent Vehicle",
+            LicenseType = "pilot",
+            MenuType = "aircraft",
+            distance = 2.5,
+        },
+        {
+            type = "client",
+            event = "qb-rental:client:return",
+            icon = "fas fa-circle",
+            label = 'Return Vehicle',
+            distance = 2.5,
+        }
+    }
+    exports.ox_target:addLocalEntity(Air, options)
 end)
 
 CreateThread(function()
@@ -66,22 +64,22 @@ CreateThread(function()
 	SetEntityInvincible(Sea, true)
 	SetBlockingOfNonTemporaryEvents(Sea, true)
 
-    exports['qb-target']:AddTargetEntity(Sea, {
-        options = {
-            {
-                type = "client",
-                event = "qb-rental:client:openMenu",
-                icon = "fas fa-car",
-                label = "Rent Vehicle",
-                MenuType = "boat"
-            },
-            {
-                type = "client",
-                event = "qb-rental:client:return",
-                icon = "fas fa-circle",
-                label = 'Return Vehicle'
-            }
+    local options = {
+        {
+            type = "client",
+            event = "qb-rental:client:openMenu",
+            icon = "fas fa-car",
+            label = "Rent Vehicle",
+            MenuType = "boat",
+            distance = 2.5,
         },
-        distance = 2.5,
-    })
+        {
+            type = "client",
+            event = "qb-rental:client:return",
+            icon = "fas fa-circle",
+            label = 'Return Vehicle',
+            distance = 2.5,
+        }
+    }
+    exports.ox_target:addLocalEntity(Sea, options)
 end)
