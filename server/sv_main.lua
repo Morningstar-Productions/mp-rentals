@@ -1,10 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-QBCore.Functions.CreateUseableItem("rentalpapers", function(source, item, plate)
-    TriggerEvent("vehiclekeys:client:SetOwner", plate)
-end)
-
-RegisterServerEvent('qb-rental:server:rentalpapers', function(plate, model)
+RegisterServerEvent('mp-rentals:server:rentalpapers', function(plate, model)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local info = {
@@ -14,13 +10,7 @@ RegisterServerEvent('qb-rental:server:rentalpapers', function(plate, model)
     exports.ox_inventory:AddItem(source, 'rentalpapers', 1, info)
 end)
 
-
-RegisterServerEvent('qb-rental:server:removepapers', function(plate, model)
-    local src = source
-    exports.ox_inventory:RemoveItem(src, 'rentalpapers', 1, info)
-end)
-
-QBCore.Functions.CreateCallback('qb-rental:server:CashCheck',function(source, cb, money)
+QBCore.Functions.CreateCallback('mp-rentals:server:CashCheck',function(source, cb, money)
     local src = source 
     local Player = QBCore.Functions.GetPlayer(src)
     if Player.PlayerData.money.cash >= money then
@@ -31,7 +21,7 @@ QBCore.Functions.CreateCallback('qb-rental:server:CashCheck',function(source, cb
     end
 end)
 
-QBCore.Functions.CreateCallback('qb-rentals:server:getPilotLicenseStatus', function(source, cb, licenseType)
+QBCore.Functions.CreateCallback('mp-rentals:server:getPilotLicenseStatus', function(source, cb, licenseType)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local licenseTable = Player.PlayerData.metadata["licences"]
@@ -44,7 +34,7 @@ QBCore.Functions.CreateCallback('qb-rentals:server:getPilotLicenseStatus', funct
     end
 end)
 
-QBCore.Functions.CreateCallback('qb-rentals:server:getDriverLicenseStatus', function(source, cb, licenseType)
+QBCore.Functions.CreateCallback('mp-rentals:server:getDriverLicenseStatus', function(source, cb, licenseType)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local licenseTable = Player.PlayerData.metadata["licences"]

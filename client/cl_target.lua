@@ -10,7 +10,7 @@ CreateThread(function()
 
     local options = {
         {
-            event = "qb-rental:client:LicenseCheck",
+            event = "mp-rentals:client:LicenseCheck",
             icon = "fas fa-car",
             label = "Rent Vehicle",
             LicenseType = "driver",
@@ -18,7 +18,7 @@ CreateThread(function()
             distance = 2.5,
         },
         {
-            event = "qb-rental:client:return",
+            event = "mp-rentals:client:return",
             icon = "fas fa-circle",
             label = 'Return Vehicle',
             distance = 2.5,
@@ -38,7 +38,7 @@ CreateThread(function()
     local options = {
         {
             type = "client",
-            event = "qb-rental:client:LicenseCheck",
+            event = "mp-rentals:client:LicenseCheck",
             icon = "fas fa-car",
             label = "Rent Vehicle",
             LicenseType = "pilot",
@@ -47,7 +47,7 @@ CreateThread(function()
         },
         {
             type = "client",
-            event = "qb-rental:client:return",
+            event = "mp-rentals:client:return",
             icon = "fas fa-circle",
             label = 'Return Vehicle',
             distance = 2.5,
@@ -67,7 +67,7 @@ CreateThread(function()
     local options = {
         {
             type = "client",
-            event = "qb-rental:client:openMenu",
+            event = "mp-rentals:client:openMenu",
             icon = "fas fa-car",
             label = "Rent Vehicle",
             MenuType = "boat",
@@ -75,7 +75,7 @@ CreateThread(function()
         },
         {
             type = "client",
-            event = "qb-rental:client:return",
+            event = "mp-rentals:client:return",
             icon = "fas fa-circle",
             label = 'Return Vehicle',
             distance = 2.5,
