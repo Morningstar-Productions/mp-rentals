@@ -4,7 +4,7 @@ local SpawnVehicle = false
 -- Vehicle Rentals
 
 RegisterNetEvent('mp-rentals:client:LicenseCheck', function(data)
-    license = data.LicenseType
+    local license = data.LicenseType
     if license == "driver" then
         QBCore.Functions.TriggerCallback("mp-rentals:server:getDriverLicenseStatus", function(hasLicense)
             if hasLicense  then
@@ -27,8 +27,7 @@ RegisterNetEvent('mp-rentals:client:LicenseCheck', function(data)
 end)
 
 RegisterNetEvent('mp-rentals:client:openMenu', function(data)
-    menu = data.MenuType
-
+    local menu = data.MenuType
     local vehMenu = {}
 
     if menu == "vehicle" then
@@ -102,7 +101,6 @@ RegisterNetEvent('mp-rentals:client:openMenu', function(data)
 end)
 
 RegisterNetEvent('mp-rentals:client:spawncar', function(data)
-    local player = PlayerPedId()
     local money = data.money
     local model = data.model
     local label = Lang:t("error.not_enough_space", {vehicle = menu:sub(1,1):upper()..menu:sub(2)})
@@ -138,7 +136,7 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
                 if menu == "vehicle" then
                     QBCore.Functions.SpawnVehicle(model, function(vehicle)
                         SetEntityHeading(vehicle, Config.Locations.vehicle.spawnpoint.w)
-                        TaskWarpPedIntoVehicle(player, vehicle, -1)
+                        TaskWarpPedIntoVehicle(cache.ped, vehicle, -1)
                         TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(vehicle))
                         SetVehicleEngineOn(vehicle, true, true)
                         SetVehicleDirtLevel(vehicle, 0.0)
@@ -149,7 +147,7 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
                 elseif menu == "aircraft" then
                     QBCore.Functions.SpawnVehicle(model, function(vehicle)
                         SetEntityHeading(vehicle, Config.Locations.aircraft.spawnpoint.w)
-                        TaskWarpPedIntoVehicle(player, vehicle, -1)
+                        TaskWarpPedIntoVehicle(cache.ped, vehicle, -1)
                         TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(vehicle))
                         SetVehicleEngineOn(vehicle, true, true)
                         SetVehicleDirtLevel(vehicle, 0.0)
@@ -159,7 +157,7 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
                 elseif menu == "boat" then
                     QBCore.Functions.SpawnVehicle(model, function(vehicle)
                         SetEntityHeading(vehicle, Config.Locations.boat.spawnpoint.w)
-                        TaskWarpPedIntoVehicle(player, vehicle, -1)
+                        TaskWarpPedIntoVehicle(cache.ped, vehicle, -1)
                         TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(vehicle))
                         SetVehicleEngineOn(vehicle, true, true)
                         SetVehicleDirtLevel(vehicle, 0.0)
@@ -168,7 +166,7 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
                     end, Config.Locations.boat.spawnpoint, true)
                 end 
                 Wait(1000)
-                local vehicle = GetVehiclePedIsIn(player, false)
+                local vehicle = GetVehiclePedIsIn(cache.ped, false)
                 local vehicleLabel = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
                 vehicleLabel = GetLabelText(vehicleLabel)
                 local plate = GetVehicleNumberPlateText(vehicle)
@@ -184,10 +182,9 @@ end)
 
 RegisterNetEvent('mp-rentals:client:return', function()
     if SpawnVehicle then
-        local Player = QBCore.Functions.GetPlayerData()
         QBCore.Functions.Notify(Lang:t("task.veh_returned"), 'success')
-        local car = GetVehiclePedIsIn(PlayerPedId(),true)
-        NetworkFadeOutEntity(car, true,false)
+        local car = GetVehiclePedIsIn(PlayerPedId(), true)
+        NetworkFadeOutEntity(car, true, false)
         Wait(2000)
         QBCore.Functions.DeleteVehicle(car)
     else 

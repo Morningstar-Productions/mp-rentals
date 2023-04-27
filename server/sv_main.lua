@@ -24,7 +24,7 @@ end)
 QBCore.Functions.CreateCallback('mp-rentals:server:getPilotLicenseStatus', function(source, cb, licenseType)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local licenseTable = Player.PlayerData.metadata["licences"]
+    local licenseTable = Player.PlayerData.metadata.licences
     print(json.encode(licenseTable))
 
     if licenseTable.pilot then
@@ -37,7 +37,7 @@ end)
 QBCore.Functions.CreateCallback('mp-rentals:server:getDriverLicenseStatus', function(source, cb, licenseType)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local licenseTable = Player.PlayerData.metadata["licences"]
+    local licenseTable = Player.PlayerData.metadata.licences
 
     if licenseTable.driver then
         cb(true)

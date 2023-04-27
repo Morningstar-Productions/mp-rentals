@@ -1,9 +1,18 @@
 fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
-author 'Carbon#1002'
-description 'qb-rentals'
-version '2.0'
+name 'mp-rentals'
+author 'xViperAG#0113'
+version '2.0.0'
+repository 'https://github.com/Morningstar-Development/mp-rentals'
+description 'Rental Script for QBCore using ox_lib and ox_inventory'
+
+dependencies {
+    'ox_lib',
+    'ox_inventory',
+    'qb-core'
+}
 
 shared_scripts {
     '@qb-core/shared/locale.lua',
@@ -19,5 +28,3 @@ client_script {
 server_script {
     'server/sv_*.lua'
 }
-
-lua54 'yes'
