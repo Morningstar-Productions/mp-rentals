@@ -4,6 +4,10 @@
 # md-rentals
 This is a vehicle rental script for Cars, Aircrafts and Boats. This script is made for the qbcore framework and utilizes qb-target.
 
+## Discord
+
+Join the Discord here! https://discord.gg/3CXrkvQVds
+
 # Features
 - Fully Configurable
 - Checks to see if player has correct amount of cash
