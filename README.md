@@ -1,7 +1,7 @@
 <div align='center'><h1><a href='https://xviperag.gitbook.io/morningstar-development/free-releases/rentals'>Documentation</a></h3></div>
 <br>
 
-# md-rentals
+# mp-rentals
 This is a vehicle rental script for Cars, Aircrafts and Boats. This script is made for the qbcore framework and utilizes qb-target.
 
 ## Discord
