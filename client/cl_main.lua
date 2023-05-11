@@ -118,7 +118,7 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
         if IsAnyVehicleNearPoint(Config.Locations.boat.spawnpoint.x, Config.Locations.boat.spawnpoint.y, Config.Locations.boat.spawnpoint.z, 10.0) then 
             QBCore.Functions.Notify(label, "error", 4500)
             return
-        end  
+        end
     end
 
     QBCore.Functions.TriggerCallback("mp-rentals:server:CashCheck",function(money)

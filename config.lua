@@ -4,15 +4,16 @@ Config.FuelExport = 'cdn-fuel'
 
 Config.Locations = {
     vehicle = {
-        spawnpoint = vector4(111.37, -1081.11, 29.19, 341.23),
+        spawnpoint = vec4(111.37, -1081.11, 29.19, 341.23),
+        ped = vec4(109.55, -1089.71, 29.3, 351.28),
     },
 
     aircraft = {
-        spawnpoint = vector4(-1673.4, -3158.47, 13.99, 331.49),
+        spawnpoint = vec4(-1673.4, -3158.47, 13.99, 331.49),
     },
 
     boat = {
-        spawnpoint = vector4(-794.95, -1506.27, 1.08, 107.79),
+        spawnpoint = vec4(-794.95, -1506.27, 1.08, 107.79),
     },
 }
 

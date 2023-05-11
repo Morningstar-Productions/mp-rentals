@@ -1,8 +1,9 @@
-local QBCore = exports['qb-core']:GetCoreObject()
-
 CreateThread(function()
-    QBCore.Functions.LoadModel(`a_m_y_business_03`)
-    local Land = CreatePed(0, `a_m_y_business_03`, 109.55, -1089.71, 29.3 - 1.0, 351.28, false, false)
+    local model = joaat(`a_m_y_business_03`)
+    lib.requestModel(model)
+    local coords = Config.Locations.vehicles.ped
+    local Land = CreatePed(0, model, coords.x, coords.y, coords.z, coords.w, false, false)
+
     TaskStartScenarioInPlace(Land, 'WORLD_HUMAN_CLIPBOARD', true)
 	FreezeEntityPosition(Land, true)
 	SetEntityInvincible(Land, true)
@@ -28,8 +29,11 @@ CreateThread(function()
 end)
 
 CreateThread(function()
-    QBCore.Functions.LoadModel(`s_m_y_airworker`)
-    local Air = CreatePed(0, `s_m_y_airworker`, -1686.57, -3149.22, 13.99 - 1.0, 240.88, false, false)
+    local model = joaat(`s_m_y_airworker`)
+    lib.requestModel(model)
+    local coords = Config.Locations.aircraft.ped
+    local Air = CreatePed(0, model, coords.x, coords.y, coords.z, coords.w, false, false)
+
     TaskStartScenarioInPlace(Air, 'WORLD_HUMAN_CLIPBOARD', true)
 	FreezeEntityPosition(Air, true)
 	SetEntityInvincible(Air, true)
@@ -57,8 +61,11 @@ CreateThread(function()
 end)
 
 CreateThread(function()
-    QBCore.Functions.LoadModel(`mp_m_boatstaff_01`)
-    local Sea = CreatePed(0, `mp_m_boatstaff_01`, -753.5, -1512.27, 5.02 - 1.0, 25.61, false, false)
+    local model = joaat(`mp_m_boatstaff_01`)
+    lib.requestModel(model)
+    local coords = Config.Locations.aircraft.ped
+    local Sea = CreatePed(0, model, coords.x, coords.y, coords.z, coords.w, false, false)
+
     TaskStartScenarioInPlace(Sea, 'WORLD_HUMAN_CLIPBOARD', true)
 	FreezeEntityPosition(Sea, true)
 	SetEntityInvincible(Sea, true)
