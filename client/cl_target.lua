@@ -1,7 +1,7 @@
 CreateThread(function()
     local model = joaat(`a_m_y_business_03`)
     lib.requestModel(model)
-    local coords = Config.Locations.vehicles.ped
+    local coords = Config.Locations.vehicle.ped
     local Land = CreatePed(0, model, coords.x, coords.y, coords.z, coords.w, false, false)
 
     TaskStartScenarioInPlace(Land, 'WORLD_HUMAN_CLIPBOARD', 1, false)
