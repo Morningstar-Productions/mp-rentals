@@ -14,6 +14,8 @@ Support Provided:
 - QBox Project ✅
 - ESX Framework (Legacy or 1.1) ❌
 
+## Preview - Coming Soon
+
 ## Discord
 
 Join the Discord here! [Discord](https://discord.gg/3CXrkvQVds)
@@ -26,6 +28,8 @@ Join the Discord here! [Discord](https://discord.gg/3CXrkvQVds)
 - Not in use 0.00 In use 0.00-0.01
 - Ability to return all vehicles 
 - License Checks
+- Image Preview for Vehicles
+- ox_inventory Metadata Items
 
 # Dependencies 
 - [ox_target](https://github.com/overextended/ox_target)
