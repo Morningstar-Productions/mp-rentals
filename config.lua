@@ -1,6 +1,7 @@
 Config = {}
 
 Config.FuelExport = 'cdn-fuel'
+Config.OxQW = false -- Use HasSearch Function for ox_lib
 
 Config.Locations = {
     vehicle = {

@@ -33,6 +33,9 @@ Join the Discord here! [Discord](https://discord.gg/3CXrkvQVds)
 - [ox_lib](https://github.com/overextended/ox_lib/releases)
 - [qb-core](https://github.com/qbcore-framework/qb-core)
 
+# Optional Dependencies
+- [ox_lib_qw-scripts](https://github.com/qw-scripts/ox_lib/tree/qw-scripts--with-search)
+
 # Change Logs
 - 1.0 - Inital release
 - 1.1 - Script optimization / Locales

@@ -4,7 +4,7 @@ CreateThread(function()
     local coords = Config.Locations.vehicles.ped
     local Land = CreatePed(0, model, coords.x, coords.y, coords.z, coords.w, false, false)
 
-    TaskStartScenarioInPlace(Land, 'WORLD_HUMAN_CLIPBOARD', true)
+    TaskStartScenarioInPlace(Land, 'WORLD_HUMAN_CLIPBOARD', 1, false)
 	FreezeEntityPosition(Land, true)
 	SetEntityInvincible(Land, true)
 	SetBlockingOfNonTemporaryEvents(Land, true)
@@ -34,7 +34,7 @@ CreateThread(function()
     local coords = Config.Locations.aircraft.ped
     local Air = CreatePed(0, model, coords.x, coords.y, coords.z, coords.w, false, false)
 
-    TaskStartScenarioInPlace(Air, 'WORLD_HUMAN_CLIPBOARD', true)
+    TaskStartScenarioInPlace(Air, 'WORLD_HUMAN_CLIPBOARD', 1, false)
 	FreezeEntityPosition(Air, true)
 	SetEntityInvincible(Air, true)
 	SetBlockingOfNonTemporaryEvents(Air, true)
@@ -66,7 +66,7 @@ CreateThread(function()
     local coords = Config.Locations.aircraft.ped
     local Sea = CreatePed(0, model, coords.x, coords.y, coords.z, coords.w, false, false)
 
-    TaskStartScenarioInPlace(Sea, 'WORLD_HUMAN_CLIPBOARD', true)
+    TaskStartScenarioInPlace(Sea, 'WORLD_HUMAN_CLIPBOARD', 1, false)
 	FreezeEntityPosition(Sea, true)
 	SetEntityInvincible(Sea, true)
 	SetBlockingOfNonTemporaryEvents(Sea, true)

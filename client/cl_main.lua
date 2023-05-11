@@ -27,7 +27,7 @@ RegisterNetEvent('mp-rentals:client:LicenseCheck', function(data)
 end)
 
 RegisterNetEvent('mp-rentals:client:openMenu', function(data)
-    local menu = data.MenuType
+    menu = data.MenuType
     local vehMenu = {}
 
     if menu == "vehicle" then
@@ -94,7 +94,7 @@ RegisterNetEvent('mp-rentals:client:openMenu', function(data)
     lib.registerContext({
         id = "rental_veh_menu",
         title = "Rental Vehicles",
-        hasSearch = true,
+        hasSearch = Config.OxQW,
         options = vehMenu
     })
     lib.showContext('rental_veh_menu')
@@ -121,18 +121,18 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
         end
     end
 
-    QBCore.Functions.TriggerCallback("mp-rentals:server:CashCheck",function(money)
-        if money then
-            local alert = lib.alertDialog({
-                header = 'You are about to purchase a vehicle',
-                content = 'You are about to purchase a vehicle for ' .. money .. ".  \n Are you sure you want to rent this vehicle?",
-                centered = true,
-                cancel = true,
-                labels = {
-                    confirm = 'Rent',
-                }
-            })
-            if alert then
+    local alert = lib.alertDialog({
+        header = 'You are about to purchase a vehicle',
+        content = 'You are about to purchase a vehicle for ' .. money .. ".  \n Are you sure you want to rent this vehicle?",
+        centered = true,
+        cancel = true,
+        labels = {
+            confirm = 'Rent',
+        }
+    })
+    if alert then
+        QBCore.Functions.TriggerCallback("mp-rentals:server:CashCheck",function(money)
+            if money then
                 if menu == "vehicle" then
                     QBCore.Functions.SpawnVehicle(model, function(vehicle)
                         SetEntityHeading(vehicle, Config.Locations.vehicle.spawnpoint.w)
@@ -172,18 +172,18 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
                 local plate = GetVehicleNumberPlateText(vehicle)
                 TriggerServerEvent('mp-rentals:server:rentalpapers', plate, vehicleLabel)
             else
-                QBCore.Functions.Notify("Maybe next time..", "error", 4500)
+                QBCore.Functions.Notify(Lang:t("error.not_enough_money"), "error", 4500)
             end
-        else
-            QBCore.Functions.Notify(Lang:t("error.not_enough_money"), "error", 4500)
-        end
-    end, money)
+        end, money)
+    else
+        QBCore.Functions.Notify("Maybe next time..", "error", 4500)
+    end
 end)
 
 RegisterNetEvent('mp-rentals:client:return', function()
     if SpawnVehicle then
         QBCore.Functions.Notify(Lang:t("task.veh_returned"), 'success')
-        local car = GetVehiclePedIsIn(PlayerPedId(), true)
+        local car = GetVehiclePedIsIn(cache.ped, true)
         NetworkFadeOutEntity(car, true, false)
         Wait(2000)
         QBCore.Functions.DeleteVehicle(car)
