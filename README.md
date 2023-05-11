@@ -28,4 +28,7 @@ Join the Discord here! https://discord.gg/3CXrkvQVds
 - 1.1 - Script optimization / Locales
 - 2.0 - Script Revamp and Ox Optimization
 
-# Credits - [itsHyper](https://github.com/itsHyper) & elfishii 
+# Credits
+- [carbontheape](https://github.com/carbontheape) - Additional Types and New Locations
+- [itsHyper](https://github.com/itsHyper) & elfishii - Initial Version
+- [KevinGirardx](https://github.com/KevinGirardx) - Inspiration on Ox Menu
