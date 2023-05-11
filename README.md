@@ -21,6 +21,7 @@ Join the Discord here! https://discord.gg/3CXrkvQVds
 - [ox_target](https://github.com/overextended/ox_target)
 - [ox_inventory](https://github.com/overextended/ox_inventory/releases)
 - [ox_lib](https://github.com/overextended/ox_lib/releases)
+- [qb-core](https://github.com/qbcore-framework/qb-core)
 
 # Change Logs
 - 1.0 - Inital release

@@ -11,6 +11,7 @@ description 'Rental Script for QBCore using ox_lib and ox_inventory'
 dependencies {
     'ox_lib',
     'ox_inventory',
+    'ox_target',
     'qb-core'
 }
 
