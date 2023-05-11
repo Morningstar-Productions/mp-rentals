@@ -1,24 +1,27 @@
 Config = {}
 
 Config.FuelExport = 'cdn-fuel'
-Config.OxQW = false -- Use HasSearch Function for ox_lib
+
+Config.OxQW = true
 
 Config.Locations = {
     vehicle = {
-        spawnpoint = vec4(111.37, -1081.11, 29.19, 341.23),
-        ped = vec4(109.55, -1089.71, 29.3, 351.28),
+        spawnpoint = vector4(111.37, -1081.11, 29.19, 341.23),
+        ped = vec4(109.55, -1089.71, 28.3, 351.28),
     },
 
     aircraft = {
-        spawnpoint = vec4(-1673.4, -3158.47, 13.99, 331.49),
+        spawnpoint = vector4(-1673.4, -3158.47, 13.99, 331.49),
+        ped = vec4(-1686.57, -3149.22, 12.99, 240.88),
     },
 
     boat = {
-        spawnpoint = vec4(-794.95, -1506.27, 1.08, 107.79),
+        spawnpoint = vector4(-794.95, -1506.27, 1.08, 107.79),
+        ped = vec4(-753.5, -1512.27, 4.02, 25.61),
     },
 }
 
-Config.Blips = {
+Config.VehBlips = {
     {title= Lang:t("info.land_veh"), colour= 50, id= 56, x= 109.55, y= -1089.71, z= 29.3},
     --{title= Lang:t("info.air_veh"), colour= 32, id= 578, x= -1673.39, y= -3158.45, z= 13.99},
     --{title= Lang:t("info.sea_veh"), colour= 42, id= 410, x= -753.55, y= -1512.24, z= 5.02}, 
