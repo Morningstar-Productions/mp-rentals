@@ -130,7 +130,7 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
             confirm = 'Rent',
         }
     })
-    if alert then
+    if alert == 'confirm' then
         QBCore.Functions.TriggerCallback("mp-rentals:server:CashCheck",function(money)
             if money then
                 if menu == "vehicle" then
