@@ -2,7 +2,17 @@
 <div align='center'><h1><a href='https://xviperag.gitbook.io/morningstar-development/free-releases/rentals'>Documentation</a></h3></div>
 <br>
 
-This is a vehicle rental script for Cars, Aircrafts and Boats. This script is made for the qbcore framework and utilizes qb-target.
+## Framework
+
+This script utilizes OverExtended's ox-resources and provides a lot of utilities and functions for the end user.
+
+The initial use for this script is for any developer/server owner using the QBCore or QBox Framework. However, over time, there may be some added functions to allow for cross platform use.
+
+Support Provided:
+
+- QBCore Framework ✅
+- QBox Project ✅
+- ESX Framework (Legacy or 1.1) ❌
 
 ## Discord
 
