@@ -1,0 +1,14 @@
+{
+    "air_veh": "Aircraft Rentals",
+    "land_veh": "Vehicle Rentals",
+    "sea_veh": "Boat Rentals",
+
+    "not_enough_space": "%s is in the way!",
+    "not_enough_money": "You do not have enough money!",
+    "no_driver_license": "You do not have a driver license!",
+    "no_pilot_license": "You do not have a pilot license!",
+    "next_time": "Maybe next time...",
+
+    "rent_veh_label": "Rent Vehicle",
+    "price_label": "Price"
+}

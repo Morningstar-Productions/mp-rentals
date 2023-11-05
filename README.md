@@ -12,7 +12,8 @@ Support Provided:
 
 - QBCore Framework ✅
 - QBox Project ✅
-- ESX Framework (Legacy or 1.1) ❌
+- ESX Framework (Legacy or 1.1) - WORK IN PROGRESS
+- Overextended Ox Core - WORK IN PROGRESS
 
 ## Preview - Coming Soon
 
@@ -35,7 +36,7 @@ Join the Discord here! [Discord](https://discord.gg/3CXrkvQVds)
 - [ox_target](https://github.com/overextended/ox_target)
 - [ox_inventory](https://github.com/overextended/ox_inventory/releases)
 - [ox_lib](https://github.com/overextended/ox_lib/releases)
-- [qb-core](https://github.com/qbcore-framework/qb-core)
+- [Renewed-Lib](https://github.com/Renewed-Scripts/Renewed-Lib)
 
 # Optional Dependencies
 - [ox_lib_qw-scripts](https://github.com/qw-scripts/ox_lib/tree/qw-scripts--with-search)
@@ -44,8 +45,11 @@ Join the Discord here! [Discord](https://discord.gg/3CXrkvQVds)
 - 1.0 - Inital release
 - 1.1 - Script optimization / Locales
 - 2.0 - Script Revamp and Ox Optimization
+- 2.5 - Work In Progress Multi-Framework
 
 # Credits
 - [carbontheape](https://github.com/carbontheape) - Additional Types and New Locations
 - [itsHyper](https://github.com/itsHyper) & elfishii - Initial Version
 - [KevinGirardx](https://github.com/KevinGirardx) - Inspiration on Ox Menu
+- [QBox](https://github.com/QBox-Project) - Vehicle Spawn Logic and Utils
+- [FjamZoo](https://github.com/Renewed-Scripts) - Utilization of Renewed-Lib for Multi-Framework Support
