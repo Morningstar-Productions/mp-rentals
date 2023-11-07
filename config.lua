@@ -25,7 +25,7 @@ Config.Locations = {
 Config.VehBlips = {
     { title = locale("land_veh"), color = 50, id = 56, coords = vec3(109.55, -1089.71, 29.3)},
     { title = locale("air_veh"), color = 32, id = 578, coords = vec3(-1673.39, -3158.45, 13.99)},
-    { title = locale("sea_veh"), color = 42, id = 410, co0rds = vec3(-753.55, -1512.24, 5.02)},
+    { title = locale("sea_veh"), color = 42, id = 410, coords = vec3(-753.55, -1512.24, 5.02)},
 }
 
 Config.Vehicles = {
