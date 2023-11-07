@@ -107,7 +107,7 @@ end
 
 local function CreateRentalBlips()
     for _, blip in pairs(Config.VehBlips) do
-        Utils.createBlips(blip.title, blip.coords, blip.id, blip.scale or 0.65, blip.color)
+        Utils.createBlips(blip.title, vec3(blip.coords.x, blip.coords.y, blip.coords.z), blip.id, blip.scale or 0.65, blip.color)
     end
 end
 
