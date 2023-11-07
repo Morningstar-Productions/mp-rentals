@@ -1,6 +1,15 @@
 local Utils = {}
 local isServer = IsDuplicityVersion()
 
+---Trim unwanted characters off the string
+---@param str string
+---@return string?
+---@return number? count
+function string.trim(str) -- luacheck: ignore
+    if not str then return nil end
+    return string.gsub(str, '^%s*(.-)%s*$', '%1')
+end
+
 ---@param text string
 ---@param coords vector3
 ---@param icon number
