@@ -1,112 +1,16 @@
 lib.locale()
 local MPc = require 'modules.client'
 local Utils = require 'modules.utils'
-local menu
 
 ------------
 -- Events --
 ------------
 
-RegisterNetEvent('mp-rentals:client:LicenseCheck', function(data)
-    local license = data.LicenseType
-    if license == "driver" then
-        local hasLicense = lib.callback.await("mp-rentals:server:getDriverLicenseStatus", false)
-        if hasLicense  then
-            TriggerEvent('mp-rentals:client:openMenu', data)
-            MenuType = "vehicle"
-        else
-            MPc.Notify(locale('no_driver_license'), "error", 4500)
-        end
-    elseif license == "pilot" then
-        local hasLicense = lib.callback.await("mp-rentals:server:getPilotLicenseStatus", false)
-        if hasLicense  then
-            TriggerEvent('mp-rentals:client:openMenu', data)
-            MenuType = "aircraft"
-        else
-            MPc.Notify(locale('no_pilot_license'), "error", 4500)
-        end
-    end
-end)
-
-RegisterNetEvent('mp-rentals:client:openMenu', function(data)
-    menu = data.MenuType
-    local vehMenu = {}
-
-    if menu == "vehicle" then
-        for i = 1, #Config.Vehicles.land do
-            local name = Config.Vehicles.land[i].name
-            vehMenu[#vehMenu+1] = {
-                title = name,
-                description = locale('rent_veh_label'),
-                icon = Config.Vehicles.land[i].icon,
-                arrow = true,
-                event = "mp-rentals:client:spawncar",
-                image = Config.Vehicles.land[i].image,
-                metadata = {
-                    {label = locale('price_label'), value = "$" .. Config.Vehicles.land[i].money}
-                },
-                progress = Config.Vehicles.land[i].fuel,
-                args = {
-                    model = Config.Vehicles.land[i].model,
-                    money = Config.Vehicles.land[i].money,
-                    fuel = Config.Vehicles.land[i].fuel
-                }
-            }
-        end
-    elseif menu == "aircraft" then
-        for i = 1, #Config.Vehicles.air do
-            local name = Config.Vehicles.air[i].name
-            vehMenu[#vehMenu+1] = {
-                title = name,
-                description = locale('rent_veh_label'),
-                icon = Config.Vehicles.air[i].icon,
-                arrow = true,
-                event = "mp-rentals:client:spawncar",
-                image = Config.Vehicles.air[i].image,
-                metadata = {
-                    {label = locale('price_label'), value = "$" .. Config.Vehicles.air[i].money}
-                },
-                args = {
-                    model = Config.Vehicles.air[i].model,
-                    money = Config.Vehicles.air[i].money,
-                    fuel = Config.Vehicles.air[i].fuel
-                }
-            }
-        end
-    elseif menu == "boat" then
-        for i = 1, #Config.Vehicles.sea do
-            local name = Config.Vehicles.sea[i].name
-            vehMenu[#vehMenu+1] = {
-                title = name,
-                description = locale('rent_veh_label'),
-                icon = Config.Vehicles.sea[i].icon,
-                arrow = true,
-                event = "mp-rentals:client:spawncar",
-                image = Config.Vehicles.sea[i].image,
-                metadata = {
-                    {label = locale('price_label'), value = "$" .. Config.Vehicles.sea[i].money}
-                },
-                args = {
-                    model = Config.Vehicles.sea[i].model,
-                    money = Config.Vehicles.sea[i].money,
-                    fuel = Config.Vehicles.sea[i].fuel
-                }
-            }
-        end
-    end
-    lib.registerContext({
-        id = "rental_veh_menu",
-        title = "Rental Vehicles",
-        hasSearch = Config.OxQW,
-        options = vehMenu
-    })
-    lib.showContext('rental_veh_menu')
-end)
-
-RegisterNetEvent('mp-rentals:client:spawncar', function(data)
+local function spawnVehicle(data)
     local money = data.money
     local model = data.model
     local fuel = data.fuel
+    local menu = data.menuType
 
     local label = locale("error.not_enough_space", menu:sub(1,1):upper()..menu:sub(2))
     if menu == "vehicle" then
@@ -201,4 +105,4 @@ RegisterNetEvent('mp-rentals:client:spawncar', function(data)
     else
         MPc.notify(locale('next_time'), 'error', 4500)
     end
-end)
+end exports('spawnVehicle', spawnVehicle)

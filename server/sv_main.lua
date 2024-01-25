@@ -51,11 +51,3 @@ lib.callback.register('mp-rentals:server:SpawnVehicleSpawnerVehicle', function(s
 
     return netId
 end)
-
----@todo Finish and fix in future
-exports('rentalpapers', function(event, item, inventory, slot, data)
-    print(json.encode(item), data, slot)
-    if event == 'usedItem' then
-        TriggerClientEvent('vehiclekeys:client:SetOwner', inventory, item.metadata.plate)
-    end
-end)

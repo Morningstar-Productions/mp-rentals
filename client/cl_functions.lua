@@ -1,8 +1,28 @@
 local Utils = require 'modules.utils'
+local MPc = require 'modules.client'
 
 --------------
 -- Functons --
 --------------
+
+local function checkLicenseData(data)
+    local license = data.LicenseType
+    if license == "driver" then
+        local hasLicense = lib.callback.await("mp-rentals:server:getDriverLicenseStatus", false)
+        if hasLicense  then
+            MPc.openVehicleMenu(data)
+        else
+            MPc.Notify(locale('no_driver_license'), "error", 4500)
+        end
+    elseif license == "pilot" then
+        local hasLicense = lib.callback.await("mp-rentals:server:getPilotLicenseStatus", false)
+        if hasLicense  then
+            MPc.openVehicleMenu(data)
+        else
+            MPc.Notify(locale('no_pilot_license'), "error", 4500)
+        end
+    end
+end
 
 -- Borrowed from qbx_core (Standalone)
 Utils.EntityStateHandler('initVehicle', function(entity, _, value)
@@ -44,11 +64,15 @@ local function CreatePeds()
         target = {
             {
                 name = 'rentals_land_vehicles',
-                event = "mp-rentals:client:LicenseCheck",
                 icon = "fas fa-car",
                 label = "Rent Vehicle",
-                LicenseType = "driver",
-                MenuType = "vehicle",
+                onSelect = function()
+                    local data = { licenseType = 'driver', menuType = 'vehicle' }
+                    checkLicenseData(data)
+                end,
+                canInteract = function(_, distance)
+                    return distance < 2.5
+                end,
                 distance = 2.5,
             },
         }
@@ -69,11 +93,15 @@ local function CreatePeds()
         target = {
             {
                 name = 'rentals_air_vehicles',
-                event = "mp-rentals:client:LicenseCheck",
                 icon = "fas fa-car",
                 label = "Rent Vehicle",
-                LicenseType = "pilot",
-                MenuType = "aircraft",
+                onSelect = function()
+                    local data = { licenseType = 'pilot', menuType = 'aircraft' }
+                    checkLicenseData(data)
+                end,
+                canInteract = function(_, distance)
+                    return distance < 2.5
+                end,
                 distance = 2.5,
             },
         }
@@ -88,18 +116,21 @@ local function CreatePeds()
         freeze = true, -- use this if the ped should be frozen
         invincible = true, -- use this if the ped should be invincible 
         tempevents = true,-- use this if the ped should block temporary events
-        id = 'rentals_air_vehicles', -- Unique ID for the ped
+        id = 'rentals_boat_vehicles', -- Unique ID for the ped
 
         -- Normal ox Target stuff --
         target = {
             {
                 name = 'rentals_air_vehicles',
-                event = "mp-rentals:client:LicenseCheck",
                 icon = "fas fa-car",
                 label = "Rent Vehicle",
-                LicenseType = "pilot",
-                MenuType = "aircraft",
-                distance = 2.5,
+                onSelect = function()
+                    local data = { menuType = 'boat' }
+                    MPc.openVehicleMenu(data)
+                end,
+                canInteract = function(_, distance)
+                    return distance < 2.5
+                end,
             },
         }
     })
@@ -110,6 +141,19 @@ local function CreateRentalBlips()
         Utils.createBlips(blip.title, vec3(blip.coords.x, blip.coords.y, blip.coords.z), blip.id, blip.scale or 0.65, blip.color)
     end
 end
+
+local function UseRentalPapers(data, slot)
+    local metadata = slot.metadata
+
+    exports.ox_inventory:useItem(data, function(data)
+        if data then
+            metadata = data.metadata
+            local hasKeys = lib.callback.await('mp-rentals:server:GiveRentalPaperKeys', false, metadata)
+            if hasKeys then return print('success') end
+        end
+    end)
+end
+exports('rentalpapers', UseRentalPapers)
 
 local function playerLoad()
     CreateRentalBlips()
