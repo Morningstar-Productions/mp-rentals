@@ -160,4 +160,4 @@ local function playerLoad()
     CreatePeds()
 end
 
-AddEventHandler('Renewed-Lib:client:PlayerLoaded', playerLoad)
+CreateThread(playerLoad)
