@@ -6,43 +6,16 @@ local MPc = require 'modules.client'
 --------------
 
 local function checkLicenseData(data)
-    local license = data.LicenseType
-    if license == "driver" then
-        local hasLicense = lib.callback.await("mp-rentals:server:getDriverLicenseStatus", false)
-        if hasLicense  then
-            MPc.openVehicleMenu(data)
-        else
-            MPc.Notify(locale('no_driver_license'), "error", 4500)
-        end
-    elseif license == "pilot" then
-        local hasLicense = lib.callback.await("mp-rentals:server:getPilotLicenseStatus", false)
-        if hasLicense  then
-            MPc.openVehicleMenu(data)
-        else
-            MPc.Notify(locale('no_pilot_license'), "error", 4500)
-        end
+    local license = data.licenseType
+
+    local hasLicense = lib.callback.await("mp-rentals:server:getLicenseStatus", false, license)
+
+    if hasLicense then
+        MPc.openVehicleMenu(data)
+    else
+        MPc.Notify(locale('no_driver_license'), "error", 4500)
     end
 end
-
--- Borrowed from qbx_core (Standalone)
-Utils.EntityStateHandler('initVehicle', function(entity, _, value)
-    if not value then return end
-
-    for i = -1, 0 do
-        local ped = GetPedInVehicleSeat(entity, i)
-
-        if ped ~= cache.ped and ped > 0 and NetworkGetEntityOwner(ped) == cache.playerId then
-            DeleteEntity(ped)
-        end
-    end
-
-    if NetworkGetEntityOwner(entity) ~= cache.playerId then return end
-    SetVehicleNeedsToBeHotwired(entity, false)
-    SetVehRadioStation(entity, 'OFF')
-    SetVehicleFuelLevel(entity, 100.0)
-    SetVehicleDirtLevel(entity, 0.0)
-    Entity(entity).state:set('initVehicle', nil, true)
-end)
 
 local function CreatePeds()
     local landcoords = Config.Locations.vehicle.ped

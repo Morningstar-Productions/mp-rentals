@@ -92,6 +92,7 @@ function MPc.openVehicleMenu(data)
             }
         end
     end
+
     lib.registerContext({
         id = "rental_veh_menu",
         title = "Rental Vehicles",

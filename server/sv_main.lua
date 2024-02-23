@@ -17,25 +17,13 @@ lib.callback.register('mp-rentals:server:CashCheck',function(source, money)
 end)
 
 ---@todo Research other license tables for other frameworks
-lib.callback.register('mp-rentals:server:getPilotLicenseStatus', function(source)
+lib.callback.register('mp-rentals:server:getLicenseStatus', function(source, licenseType)
     local Player = exports.qbx_core:GetPlayer(source) -- Find other tables
     local licenseTable = Player.PlayerData.metadata.licences
 
     if Config.Debug then print(json.encode(licenseTable)) return end
 
-    if licenseTable.pilot then return true end
-    return false
-end)
-
----@todo Research other license tables for other frameworks
-lib.callback.register('mp-rentals:server:getDriverLicenseStatus', function(source)
-    local Player = exports.qbx_core:GetPlayer(source) -- Find other tables
-    local licenseTable = Player.PlayerData.metadata.licences
-
-    if Config.Debug then print(json.encode(licenseTable)) return end
-
-    if licenseTable.driver then return true end
-    return false
+    return licenseTable[licenseType]
 end)
 
 lib.callback.register('mp-rentals:server:SpawnVehicleSpawnerVehicle', function(source, model, coords, warp)

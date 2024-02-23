@@ -1,4 +1,3 @@
-lib.locale()
 local MPc = require 'modules.client'
 local Utils = require 'modules.utils'
 

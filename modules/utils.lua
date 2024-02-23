@@ -89,7 +89,6 @@ if isServer then
         end
 
         if warp then SetPedIntoVehicle(ped, veh, -1) end
-        Entity(veh).state:set('initVehicle', true, true)
         return NetworkGetNetworkIdFromEntity(veh)
     end
 else
