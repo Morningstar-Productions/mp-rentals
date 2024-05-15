@@ -14,7 +14,6 @@ Join the Discord here! [Discord](https://discord.gg/3CXrkvQVds)
 - Checks to see if rental spot it open
 - Provides rental papers for the vehicle
 - Not in use 0.00 In use 0.00-0.01
-- Ability to return all vehicles 
 - License Checks
 - Image Preview for Vehicles
 - ox_inventory Metadata Items
