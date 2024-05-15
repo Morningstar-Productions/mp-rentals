@@ -2,19 +2,6 @@
 <div align='center'><h1><a href='https://xviperag.gitbook.io/morningstar-development/free-releases/rentals'>Documentation</a></h3></div>
 <br>
 
-## Framework
-
-This script utilizes OverExtended's ox-resources and provides a lot of utilities and functions for the end user.
-
-The initial use for this script is for any developer/server owner using the QBCore or QBox Framework. However, over time, there may be some added functions to allow for cross platform use.
-
-Support Provided:
-
-- QBCore Framework ✅
-- QBox Project ✅
-- ESX Framework (Legacy or 1.1) - WORK IN PROGRESS
-- Overextended Ox Core - WORK IN PROGRESS
-
 ## Preview - Coming Soon
 
 ## Discord
@@ -33,9 +20,11 @@ Join the Discord here! [Discord](https://discord.gg/3CXrkvQVds)
 - ox_inventory Metadata Items
 
 # Dependencies 
+- [interact](https://github.com/darktrovx/interact)
 - [ox_target](https://github.com/overextended/ox_target)
 - [ox_inventory](https://github.com/overextended/ox_inventory/releases)
 - [ox_lib](https://github.com/overextended/ox_lib/releases)
+- [qbx_core](https://github.com/QBox-Project/qbx_core/releases)
 - [Renewed-Lib](https://github.com/Renewed-Scripts/Renewed-Lib)
 
 # Optional Dependencies

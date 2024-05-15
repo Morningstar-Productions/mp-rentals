@@ -1,18 +1,15 @@
 local MPc = {}
+local config = require 'config.client'
 
 ---@param text string
 ---@param textType string
 ---@param duration number
 function MPc.Notify(text, textType, duration)
-    if GetResourceState('qb-core'):match('started') then
-        exports['qb-core']:GetCoreObject().Functions.Notify(text, textType, duration)
-    else
-        lib.notify({
-            description = text,
-            type = textType,
-            duration = duration
-        })
-    end
+    lib.notify({
+        description = text,
+        type = textType,
+        duration = duration
+    })
 end
 
 function MPc.openVehicleMenu(data)
@@ -20,75 +17,75 @@ function MPc.openVehicleMenu(data)
     local vehMenu = {}
 
     if menu == "vehicle" then
-        for i = 1, #Config.Vehicles.land do
-            local name = Config.Vehicles.land[i].name
+        for i = 1, #config.rentalVehicles.land do
+            local name = config.rentalVehicles.land[i].name
             vehMenu[#vehMenu+1] = {
                 title = name,
                 description = locale('rent_veh_label'),
-                icon = Config.Vehicles.land[i].icon,
+                icon = config.rentalVehicles.land[i].icon,
                 arrow = true,
                 onSelect = function()
                     local vehData = {
-                        model = Config.Vehicles.land[i].model,
-                        money = Config.Vehicles.land[i].money,
-                        fuel = Config.Vehicles.land[i].fuel,
+                        model = config.rentalVehicles.land[i].model,
+                        money = config.rentalVehicles.land[i].money,
+                        fuel = config.rentalVehicles.land[i].fuel,
                         menuType = menu,
                     }
                     exports['mp-rentals']:spawnVehicle(vehData)
                 end,
-                image = Config.Vehicles.land[i].image,
+                image = ('https://docs.fivem.net/vehicles/%s.webp'):format(config.rentalVehicles.land[i].model),
                 metadata = {
-                    {label = locale('price_label'), value = "$" .. Config.Vehicles.land[i].money}
+                    {label = locale('price_label'), value = "$" .. config.rentalVehicles.land[i].money}
                 },
-                progress = Config.Vehicles.land[i].fuel,
+                progress = config.rentalVehicles.land[i].fuel,
             }
         end
     elseif menu == "aircraft" then
-        for i = 1, #Config.Vehicles.air do
-            local name = Config.Vehicles.air[i].name
+        for i = 1, #config.rentalVehicles.air do
+            local name = config.rentalVehicles.air[i].name
             vehMenu[#vehMenu+1] = {
                 title = name,
                 description = locale('rent_veh_label'),
-                icon = Config.Vehicles.air[i].icon,
+                icon = config.rentalVehicles.air[i].icon,
                 arrow = true,
                 onSelect = function()
                     local vehData = {
-                        model = Config.Vehicles.air[i].model,
-                        money = Config.Vehicles.air[i].money,
-                        fuel = Config.Vehicles.air[i].fuel,
+                        model = config.rentalVehicles.air[i].model,
+                        money = config.rentalVehicles.air[i].money,
+                        fuel = config.rentalVehicles.air[i].fuel,
                         menuType = menu,
                     }
                     exports['mp-rentals']:spawnVehicle(vehData)
                 end,
-                image = Config.Vehicles.air[i].image,
+                image = ('https://docs.fivem.net/vehicles/%s.webp'):format(config.rentalVehicles.air[i].model),
                 metadata = {
-                    {label = locale('price_label'), value = "$" .. Config.Vehicles.air[i].money}
+                    {label = locale('price_label'), value = "$" .. config.rentalVehicles.air[i].money}
                 },
-                progress = Config.Vehicles.air[i].fuel,
+                progress = config.rentalVehicles.air[i].fuel,
             }
         end
     elseif menu == "boat" then
-        for i = 1, #Config.Vehicles.sea do
-            local name = Config.Vehicles.sea[i].name
+        for i = 1, #config.rentalVehicles.sea do
+            local name = config.rentalVehicles.sea[i].name
             vehMenu[#vehMenu+1] = {
                 title = name,
                 description = locale('rent_veh_label'),
-                icon = Config.Vehicles.sea[i].icon,
+                icon = config.rentalVehicles.sea[i].icon,
                 arrow = true,
                 onSelect = function()
                     local vehData = {
-                        model = Config.Vehicles.sea[i].model,
-                        money = Config.Vehicles.sea[i].money,
-                        fuel = Config.Vehicles.sea[i].fuel,
+                        model = config.rentalVehicles.sea[i].model,
+                        money = config.rentalVehicles.sea[i].money,
+                        fuel = config.rentalVehicles.sea[i].fuel,
                         menuType = menu,
                     }
                     exports['mp-rentals']:spawnVehicle(vehData)
                 end,
-                image = Config.Vehicles.sea[i].image,
+                image = ('https://docs.fivem.net/vehicles/%s.webp'):format(config.rentalVehicles.sea[i].model),
                 metadata = {
-                    {label = locale('price_label'), value = "$" .. Config.Vehicles.sea[i].money}
+                    {label = locale('price_label'), value = "$" .. config.rentalVehicles.sea[i].money}
                 },
-                progress = Config.Vehicles.sea[i].fuel,
+                progress = config.rentalVehicles.sea[i].fuel,
             }
         end
     end
@@ -96,7 +93,7 @@ function MPc.openVehicleMenu(data)
     lib.registerContext({
         id = "rental_veh_menu",
         title = "Rental Vehicles",
-        hasSearch = Config.OxQW,
+        hasSearch = config.useOxQwade,
         options = vehMenu
     })
     lib.showContext('rental_veh_menu')

@@ -1,5 +1,7 @@
 local Utils = require 'modules.utils'
 local MPc = require 'modules.client'
+local config = require 'config.client'
+local Renewed = exports['Renewed-Lib']:getLib()
 
 --------------
 -- Functons --
@@ -18,9 +20,11 @@ local function checkLicenseData(data)
 end
 
 local function CreatePeds()
-    local landcoords = Config.Locations.vehicle.ped
-    local aircoords = Config.Locations.aircraft.ped
-    local boatcoords = Config.Locations.boat.ped
+    local pedInfo = lib.callback.await('mp-rentals:server:getPedLocations', false)
+
+    local landcoords = pedInfo.vehicle
+    local aircoords = pedInfo.aircraft
+    local boatcoords = pedInfo.boat
 
     Renewed.addPed({
         model = `a_m_y_business_03`, -- The ped to be spawned
@@ -44,10 +48,26 @@ local function CreatePeds()
                     checkLicenseData(data)
                 end,
                 canInteract = function(_, distance)
-                    return distance < 2.5
+                    return distance < 2.5 and config.useTarget
                 end,
-                distance = 2.5,
             },
+        },
+
+        interact = {
+            distance = 3.0,
+            interactDst = 1.5,
+            options = {
+                {
+                    label = 'Rent Vehicle',
+                    action = function()
+                        local data = { licenseType = 'driver', menuType = 'vehicle' }
+                        checkLicenseData(data)
+                    end,
+                    canInteract = function()
+                        return not config.useTarget
+                    end
+                }
+            }
         }
     })
 
@@ -73,10 +93,26 @@ local function CreatePeds()
                     checkLicenseData(data)
                 end,
                 canInteract = function(_, distance)
-                    return distance < 2.5
+                    return distance < 2.5 and config.useTarget
                 end,
-                distance = 2.5,
             },
+        },
+
+        interact = {
+            distance = 3.0,
+            interactDst = 1.5,
+            options = {
+                {
+                    label = 'Rent Vehicle',
+                    action = function()
+                        local data = { licenseType = 'pilot', menuType = 'aircraft' }
+                        checkLicenseData(data)
+                    end,
+                    canInteract = function()
+                        return not config.useTarget
+                    end
+                }
+            }
         }
     })
 
@@ -102,15 +138,32 @@ local function CreatePeds()
                     MPc.openVehicleMenu(data)
                 end,
                 canInteract = function(_, distance)
-                    return distance < 2.5
+                    return distance < 2.5 and config.useTarget
                 end,
             },
+        },
+
+        interact = {
+            distance = 3.0,
+            interactDst = 1.5,
+            options = {
+                {
+                    label = 'Rent Vehicle',
+                    action = function()
+                        local data = { menuType = 'boat' }
+                        checkLicenseData(data)
+                    end,
+                    canInteract = function()
+                        return not config.useTarget
+                    end
+                }
+            }
         }
     })
 end
 
 local function CreateRentalBlips()
-    for _, blip in pairs(Config.VehBlips) do
+    for _, blip in pairs(config.vehBlips) do
         Utils.createBlips(blip.title, vec3(blip.coords.x, blip.coords.y, blip.coords.z), blip.id, blip.scale or 0.65, blip.color)
     end
 end
