@@ -71,8 +71,8 @@ local function spawnVehicle(data)
     end
 
     local alert = lib.alertDialog({
-        header = 'You are about to rent a vehicle',
-        content = 'You are about to rent a vehicle for ' .. money .. '.  \n Are you sure you want to rent this vehicle?',
+        header = 'You are about to purchase a vehicle',
+        content = 'You are about to purchase a vehicle for ' .. money .. '.  \n Are you sure you want to rent this vehicle?',
         centered = true,
         cancel = true,
         labels = {
