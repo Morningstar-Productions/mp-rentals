@@ -93,7 +93,7 @@ function MPc.openVehicleMenu(data)
     lib.registerContext({
         id = "rental_veh_menu",
         title = "Rental Vehicles",
-        filter = config.useFilter,
+        hasSearch = config.useOxQwade,
         options = vehMenu
     })
     lib.showContext('rental_veh_menu')
