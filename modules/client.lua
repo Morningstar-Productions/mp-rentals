@@ -31,7 +31,7 @@ function MPc.openVehicleMenu(data)
                         fuel = config.rentalVehicles.land[i].fuel,
                         menuType = menu,
                     }
-                    exports.mp_rentals:spawnVehicle(vehData)
+                    exports['mp-rentals']:spawnVehicle(vehData)
                 end,
                 image = ('https://docs.fivem.net/vehicles/%s.webp'):format(config.rentalVehicles.land[i].model),
                 metadata = {
@@ -55,7 +55,7 @@ function MPc.openVehicleMenu(data)
                         fuel = config.rentalVehicles.air[i].fuel,
                         menuType = menu,
                     }
-                    exports.mp_rentals:spawnVehicle(vehData)
+                    exports['mp-rentals']:spawnVehicle(vehData)
                 end,
                 image = ('https://docs.fivem.net/vehicles/%s.webp'):format(config.rentalVehicles.air[i].model),
                 metadata = {
@@ -79,7 +79,7 @@ function MPc.openVehicleMenu(data)
                         fuel = config.rentalVehicles.sea[i].fuel,
                         menuType = menu,
                     }
-                    exports.mp_rentals:spawnVehicle(vehData)
+                    exports['mp-rentals']:spawnVehicle(vehData)
                 end,
                 image = ('https://docs.fivem.net/vehicles/%s.webp'):format(config.rentalVehicles.sea[i].model),
                 metadata = {
