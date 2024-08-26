@@ -34,31 +34,45 @@ local function spawnVehicle(data)
     local model = data.model
     local fuel = data.fuel
     local menu = data.menuType
+    local label = locale('error.not_enough_space', menu:sub(1, 1):upper() .. menu:sub(2))
 
-    local label = locale("error.not_enough_space", menu:sub(1,1):upper()..menu:sub(2))
-    if menu == "vehicle" then
-        local spawnVeh = config.vehSpawnLocations.vehicle
-        if IsAnyVehicleNearPoint(spawnVeh.x, spawnVeh.y, spawnVeh.z, 2.0) then
-            MPc.Notify(label, "error", 4500)
-            return
+    local nearestRentPoint
+    local nearestSpawnpoint
+    local pedPos = GetEntityCoords(cache.ped)
+
+    for _, spawn in pairs(config.vehSpawnLocations[menu]) do
+        local distance = #(pedPos - vec3(spawn.xyz))
+        if not nearestRentPoint or distance < nearestRentPoint then
+            nearestRentPoint = distance
+            nearestSpawnpoint = spawn
         end
-    elseif menu == "aircraft" then
-        local spawnAir = config.vehSpawnLocations.aircraft
-        if IsAnyVehicleNearPoint(spawnAir.x, spawnAir.y, spawnAir.z, 15.0) then 
-            MPc.Notify(label, "error", 4500)
-            return
-        end
-    elseif menu == "boat" then
-        local spawnBoat = config.vehSpawnLocations.boat
-        if IsAnyVehicleNearPoint(spawnBoat.x, spawnBoat.y, spawnBoat.z, 10.0) then 
-            MPc.Notify(label, "error", 4500)
-            return
+    end
+
+    if nearestSpawnpoint then
+        if menu == 'vehicle' then
+            local spawnVeh = nearestSpawnpoint.vehicle
+            if IsAnyVehicleNearPoint(spawnVeh.x, spawnVeh.y, spawnVeh.z, 2.0) then
+                MPc.Notify(label, 'error', 4500)
+                return
+            end
+        elseif menu == 'aircraft' then
+            local spawnAir = nearestSpawnpoint.aircraft
+            if IsAnyVehicleNearPoint(spawnAir.x, spawnAir.y, spawnAir.z, 15.0) then
+                MPc.Notify(label, 'error', 4500)
+                return
+            end
+        elseif menu == 'boat' then
+            local spawnBoat = nearestSpawnpoint.boat
+            if IsAnyVehicleNearPoint(spawnBoat.x, spawnBoat.y, spawnBoat.z, 10.0) then
+                MPc.Notify(label, 'error', 4500)
+                return
+            end
         end
     end
 
     local alert = lib.alertDialog({
         header = 'You are about to purchase a vehicle',
-        content = 'You are about to purchase a vehicle for ' .. money .. ".  \n Are you sure you want to rent this vehicle?",
+        content = 'You are about to purchase a vehicle for ' .. money .. '.  \n Are you sure you want to rent this vehicle?',
         centered = true,
         cancel = true,
         labels = {
@@ -67,20 +81,23 @@ local function spawnVehicle(data)
     })
 
     if alert == 'confirm' then
-        lib.callback("mp-rentals:server:CashCheck", false, function(money)
+        lib.callback('mp-rentals:server:CashCheck', false, function(money)
             if money then
-                if menu == "vehicle" then
-                    spawnVehicleInfo(model, config.vehSpawnLocations.vehicle, fuel)
-                elseif menu == "aircraft" then
-                    spawnVehicleInfo(model, config.vehSpawnLocations.aircraft, fuel)
-                elseif menu == "boat" then
-                    spawnVehicleInfo(model, config.vehSpawnLocations.boat, fuel)
+                if nearestSpawnpoint then
+                    if menu == 'vehicle' then
+                        spawnVehicleInfo(model, nearestSpawnpoint.vehicle, fuel)
+                    elseif menu == 'aircraft' then
+                        spawnVehicleInfo(model, nearestSpawnpoint.aircraft, fuel)
+                    elseif menu == 'boat' then
+                        spawnVehicleInfo(model, nearestSpawnpoint.boat, fuel)
+                    end
                 end
             else
-                MPc.Notify(locale("not_enough_money"), "error", 4500)
+                MPc.Notify(locale('not_enough_money'), 'error', 4500)
             end
         end, money)
     else
         MPc.Notify(locale('next_time'), 'error', 4500)
     end
-end exports('spawnVehicle', spawnVehicle)
+end
+exports('spawnVehicle', spawnVehicle)
