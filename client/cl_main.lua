@@ -29,44 +29,33 @@ local function spawnVehicleInfo(model, coords, fuel)
     if not givePapers then return end
 end
 
+--- Spawns a vehicle at the nearest spawn point
+-- @param table data The data containing information about the vehicle, menu, and other configurations
 local function spawnVehicle(data)
     local money = data.money
     local model = data.model
     local fuel = data.fuel
     local menu = data.menuType
-    local label = locale('error.not_enough_space', menu:sub(1, 1):upper() .. menu:sub(2))
+    local label = locale('not_enough_space', menu:sub(1, 1):upper() .. menu:sub(2))
 
-    local nearestRentPoint
-    local nearestSpawnpoint
+    local nearestDistance = nil
+    local nearestSpawnpoint = nil
     local pedPos = GetEntityCoords(cache.ped)
 
+    -- Iterate through each spawn location to find the nearest one
     for _, spawn in pairs(config.vehSpawnLocations[menu]) do
         local distance = #(pedPos - vec3(spawn.xyz))
-        if not nearestRentPoint or distance < nearestRentPoint then
-            nearestRentPoint = distance
+        if not nearestDistance or distance < nearestDistance then
+            nearestDistance = distance
             nearestSpawnpoint = spawn
         end
     end
 
     if nearestSpawnpoint then
-        if menu == 'vehicle' then
-            local spawnVeh = nearestSpawnpoint.vehicle
-            if IsAnyVehicleNearPoint(spawnVeh.x, spawnVeh.y, spawnVeh.z, 2.0) then
-                MPc.Notify(label, 'error', 4500)
-                return
-            end
-        elseif menu == 'aircraft' then
-            local spawnAir = nearestSpawnpoint.aircraft
-            if IsAnyVehicleNearPoint(spawnAir.x, spawnAir.y, spawnAir.z, 15.0) then
-                MPc.Notify(label, 'error', 4500)
-                return
-            end
-        elseif menu == 'boat' then
-            local spawnBoat = nearestSpawnpoint.boat
-            if IsAnyVehicleNearPoint(spawnBoat.x, spawnBoat.y, spawnBoat.z, 10.0) then
-                MPc.Notify(label, 'error', 4500)
-                return
-            end
+        local vehicleCheckRadius = menu == 'vehicle' and 2.0 or menu == 'aircraft' and 1.5 or 10.0
+        if IsAnyVehicleNearPoint(nearestSpawnpoint.x, nearestSpawnpoint.y, nearestSpawnpoint.z, vehicleCheckRadius) then
+            MPc.Notify(label, 'error', 4500)
+            return
         end
     end
 
@@ -81,17 +70,9 @@ local function spawnVehicle(data)
     })
 
     if alert == 'confirm' then
-        lib.callback('mp-rentals:server:CashCheck', false, function(money)
-            if money then
-                if nearestSpawnpoint then
-                    if menu == 'vehicle' then
-                        spawnVehicleInfo(model, nearestSpawnpoint.vehicle, fuel)
-                    elseif menu == 'aircraft' then
-                        spawnVehicleInfo(model, nearestSpawnpoint.aircraft, fuel)
-                    elseif menu == 'boat' then
-                        spawnVehicleInfo(model, nearestSpawnpoint.boat, fuel)
-                    end
-                end
+        lib.callback('mp-rentals:server:CashCheck', false, function(hasMoney)
+            if hasMoney then
+                spawnVehicleInfo(model, nearestSpawnpoint, fuel)
             else
                 MPc.Notify(locale('not_enough_money'), 'error', 4500)
             end
