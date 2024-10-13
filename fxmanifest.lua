@@ -12,7 +12,7 @@ dependencies { 'ox_lib', 'ox_inventory', 'ox_target', 'Renewed-Lib' }
 
 ox_lib 'locale'
 
-shared_scripts { '@ox_lib/init.lua', '@qbx_core/modules/lib.lua', 'config.lua' }
+shared_scripts { '@ox_lib/init.lua', '@Renewed-Lib/init.lua', '@qbx_core/modules/lib.lua', 'config.lua' }
 client_script { 'client/cl_*.lua' }
 server_script { 'server/sv_*.lua' }
 

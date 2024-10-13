@@ -1,7 +1,6 @@
 local Utils = require 'modules.utils'
 local MPc = require 'modules.client'
 local config = require 'config.client'
-local Renewed = exports['Renewed-Lib']:getLib()
 
 --------------
 -- Functons --

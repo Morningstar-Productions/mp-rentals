@@ -1,5 +1,4 @@
 local svConfig = require 'config.server'
-local Renewed = exports['Renewed-Lib']:getLib()
 
 lib.callback.register('mp-rentals:server:rentalpapers', function(source, plate, model)
     local metadata = {
