@@ -7,7 +7,13 @@ return {
         boat = vec4(-753.5, -1512.27, 4.02, 25.61),
     },
 
-    addKey = function(source, plate)
-        exports['Renewed-Vehiclekeys']:addKey(source, plate)
+    addKey = function(source, plate, vehicle)
+        if GetResourceState('qbx_vehiclekeys'):match('started') then
+            return exports.qbx_vehiclekeys:GiveKey(source, vehicle)
+        end
+
+        if GetResourceState('Renewed-Vehiclekeys'):match('started') then
+            return exports['Renewed-Vehiclekeys']:addKey(source, plate)
+        end
     end
 }

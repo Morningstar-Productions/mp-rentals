@@ -4,7 +4,7 @@ lua54 'yes'
 
 name 'mp-rentals'
 author 'xViperAG#0113'
-version '2.6.0'
+version '2.7.0'
 repository 'https://github.com/Morningstar-Development/mp-rentals'
 description 'Rental Script for QBCore using ox_lib and ox_inventory'
 

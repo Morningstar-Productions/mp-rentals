@@ -8,24 +8,24 @@ local config = require 'config.client'
 local function spawnVehicleInfo(model, coords, fuel)
     local netId = lib.callback.await('mp-rentals:server:SpawnVehicleSpawnerVehicle', false, model, coords, false)
     if not netId then return end
-    local veh = NetToVeh(netId)
+    local vehicle = NetToVeh(netId)
 
     local vehLabel = GetDisplayNameFromVehicleModel(model)
     local vehicleLabel = GetLabelText(vehLabel)
-    local plate = qbx.getVehiclePlate(veh)
+    local plate = config.getPlate(vehicle)
 
     if config.fuelExport ~= '' then
-        exports[config.fuelExport]:SetFuel(veh, fuel, nil)
+        exports[config.fuelExport]:SetFuel(vehicle, fuel, nil)
     else
-        Entity(veh).state.fuel = fuel
+        Entity(vehicle).state.fuel = fuel
     end
 
     if not plate then return end
 
-    SetVehicleNumberPlateText(veh, plate)
-    Entity(veh).state:set('vehicleLock', { lock = 0 }, true)
+    SetVehicleNumberPlateText(vehicle, plate)
+    Entity(vehicle).state:set('vehicleLock', { lock = 0 }, true)
 
-    local givePapers = lib.callback.await('mp-rentals:server:rentalpapers', false, plate, vehicleLabel)
+    local givePapers = lib.callback.await('mp-rentals:server:rentalpapers', false, plate, vehicleLabel, netId)
     if not givePapers then return end
 end
 

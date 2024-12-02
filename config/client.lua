@@ -185,5 +185,13 @@ return {
                 fuel = math.random(75, 100),
             },
         }
-    }
+    },
+
+    getPlate = function(vehicle)
+        if GetResourceState('qbx_core'):match('started') then
+            return qbx.getVehiclePlate(vehicle)
+        else
+            return GetVehicleNumberPlateText(vehicle)
+        end
+    end
 }
